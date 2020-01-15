@@ -10,35 +10,45 @@ class App extends React.Component {
 		super();
 		this.state = {
 			user: {},
-			followers: []
+			followers: [],
+			followers_urls: []
 		};
 	}
 	componentDidMount() {
+		const base_url = 'https://api.github.com/users/prudentj';
 		axios
-			.get('https://api.github.com/users/prudentj')
+			.get(base_url)
 			.then(res => {
+				console.log(res);
 				this.setState({
 					user: res.data
 				});
-				console.log('State is:');
 			})
 			.catch(err => console.log(err));
-		axios.get('https://api.github.com/users/prudentj/following').then(users => {
-			console.log(users);
-			users.data.forEach(el => {
-				//followersArray.push(el.url);
-				console.log(el.url);
-				axios
-					.get(el.url)
-					.then(eachuser => {
-						//console.log(eachuser);
-
-						this.setState({followers: this.state.followers.concat(eachuser)});
-						console.log('Added Follower', this.state.followers);
-					})
-					.catch(console.log(`error`));
-			});
-		});
+		const array1 = [];
+		axios
+			.get('https://api.github.com/users/prudentj/followers')
+			.then(res => {
+				console.log(res.data);
+				this.setState({
+					followers: res.data
+				});
+			})
+			.catch(err => console.log(err));
+		//console.log(this.state.followers_urls);
+		//console.log(this.state.followers);
+		// this.state.followers_urls.forEach(el => {
+		// 	axios
+		// 		.get(el)
+		// 		.then(eachuser => {
+		// 			//console.log(eachuser);
+		// 			console('request success');
+		// 			this.setState({followers: this.state.followers.concat(eachuser)});
+		// 			console.log('Added Follower', this.state.followers);
+		// 		})
+		// 		.catch(console.log(`error`));
+		// });
+		// console.log(this.state.followers);
 	}
 	componentWillUnmount() {
 		// To avoid memory leaks
@@ -62,7 +72,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<Container>
-				<GitCard
+				{/* <GitCard
 					name={this.state.user.name}
 					avatar_url={this.state.user.avatar_url}
 					bio={this.state.user.bio}
@@ -82,8 +92,7 @@ class App extends React.Component {
 							following={el.state.user.following}
 						/>
 					);
-				})}
-				)}
+				})} */}
 			</Container>
 		);
 	}
