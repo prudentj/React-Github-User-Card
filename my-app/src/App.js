@@ -72,15 +72,16 @@ class App extends React.Component {
 	render() {
 		return (
 			<Container>
-				{/* <GitCard
-					name={this.state.user.name}
-					avatar_url={this.state.user.avatar_url}
-					bio={this.state.user.bio}
-					location={this.state.user.location}
-					followers={this.state.user.followers}
-					following={this.state.user.following}
-				/>
-				{this.state.followers.map(el => {
+				{
+					<GitCard
+						name={this.state.user.name}
+						avatar_url={this.state.user.avatar_url}
+						bio={this.state.user.bio}
+						location={this.state.user.location}
+						followers={this.state.user.followers}
+						following={this.state.user.following}
+					/>
+					/*{this.state.followers.map(el => {
 					console.log(el);
 					return (
 						<GitCard
@@ -92,7 +93,8 @@ class App extends React.Component {
 							following={el.state.user.following}
 						/>
 					);
-				})} */}
+				})} */
+				}
 			</Container>
 		);
 	}
